@@ -41,6 +41,7 @@
             toolStripSeparator1 = new ToolStripSeparator();
             lblTipoCadastro = new ToolStripLabel();
             pnlRegistros = new Panel();
+            btnFiltrar = new ToolStripButton();
             menuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             toolStrip1.SuspendLayout();
@@ -95,7 +96,7 @@
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, btnEditar, btnExcluir, toolStripSeparator1, lblTipoCadastro });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { btnAdicionar, btnEditar, btnExcluir, btnFiltrar, toolStripSeparator1, lblTipoCadastro });
             toolStrip1.Location = new Point(0, 28);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 41);
@@ -124,6 +125,7 @@
             btnEditar.Padding = new Padding(5);
             btnEditar.Size = new Size(38, 38);
             btnEditar.Text = "toolStripButton2";
+            btnEditar.Click += btnEditar_Click;
             // 
             // btnExcluir
             // 
@@ -135,6 +137,7 @@
             btnExcluir.Padding = new Padding(5);
             btnExcluir.Size = new Size(38, 38);
             btnExcluir.Text = "toolStripButton3";
+            btnExcluir.Click += btnExcluir_Click;
             // 
             // toolStripSeparator1
             // 
@@ -155,6 +158,18 @@
             pnlRegistros.Name = "pnlRegistros";
             pnlRegistros.Size = new Size(800, 356);
             pnlRegistros.TabIndex = 3;
+            // 
+            // btnFiltrar
+            // 
+            btnFiltrar.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnFiltrar.ForeColor = SystemColors.ControlLightLight;
+            btnFiltrar.Image = Properties.Resources.btnFiltrar;
+            btnFiltrar.ImageScaling = ToolStripItemImageScaling.None;
+            btnFiltrar.ImageTransparentColor = Color.Magenta;
+            btnFiltrar.Name = "btnFiltrar";
+            btnFiltrar.Padding = new Padding(5);
+            btnFiltrar.Size = new Size(38, 38);
+            btnFiltrar.Text = "toolStripButton1";
             // 
             // TelaPrincipalForm
             // 
@@ -197,5 +212,6 @@
         private Panel pnlRegistros;
         private ToolStripSeparator toolStripSeparator1;
         private ToolStripLabel lblTipoCadastro;
+        private ToolStripButton btnFiltrar;
     }
 }

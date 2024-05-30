@@ -4,8 +4,8 @@ namespace eAgenda.WinApp.ModuloContato
 {
     public class ControladorContato : ControladorBase
     {
-        private RepositorioContato repositorioContato;
-        private ListagemContatoControl listagemContato;
+        RepositorioContato repositorioContato;
+        TabelaContatoControl TabelaContatos;
 
         public ControladorContato(RepositorioContato repositorio)
         {
@@ -26,31 +26,98 @@ namespace eAgenda.WinApp.ModuloContato
 
             DialogResult resultado = telaContato.ShowDialog();
 
-            if (resultado == DialogResult.OK)
+            if (resultado != DialogResult.OK) return;
+
+            Contato novoContato = telaContato.Contato;
+
+            repositorioContato.Cadastrar(novoContato);
+
+            CarregarContatos();
+        }
+        public override void Editar()
+        {
+            TelaContatoForm telaContato = new TelaContatoForm();
+
+            int idSelecionado = TabelaContatos.ObterRegistroSelecionado();
+
+            Contato contatoSelecionado = repositorioContato.SelecionarPorId(idSelecionado);
+
+            if (contatoSelecionado == null)
             {
-                Contato novoContato = telaContato.Contato;
-
-                repositorioContato.Cadastrar(novoContato);
-
-                CarregarContatos();
+                MessageBox.Show(
+                                 "Não é possível realizar esta ação sem um registro selecionado.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            ); return;
             }
+
+            telaContato.Contato = contatoSelecionado;
+            DialogResult resultado = telaContato.ShowDialog();
+
+            if (resultado != DialogResult.OK) return;
+
+            Contato contatoEditado = telaContato.Contato;
+
+            repositorioContato.Editar(contatoSelecionado.Id, contatoEditado);
+            CarregarContatos();
+
+        }
+
+        public override void Excluir()
+        {
+            int idSelecionado = TabelaContatos.ObterRegistroSelecionado();
+
+            Contato contatoSelecionado = repositorioContato.SelecionarPorId(idSelecionado);
+
+            if (contatoSelecionado == null)
+            {
+                MessageBox.Show(
+                                 "Não é possível realizar esta ação sem um registro selecionado.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning
+                            ); return;
+            }
+
+            if (contatoSelecionado == null)
+            {
+                MessageBox.Show("Não é possivel realizar a ação sem um registro selecionado.",
+                                "Aviso",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+            }
+
+            DialogResult resultado = MessageBox.Show(
+                $"Você deseja realmente excluir o registro \"{contatoSelecionado.Nome}\"?",
+                "Confirmar Exclusão",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (resultado != DialogResult.Yes) return;
+
+            repositorioContato.Excluir(contatoSelecionado.Id);
+            CarregarContatos();
+
+
         }
 
         private void CarregarContatos()
         {
             List<Contato> contatos = repositorioContato.SelecionarTodos();
 
-            listagemContato.AtualizarRegistros(contatos);
+            TabelaContatos.AtualizarRegistros(contatos);
         }
 
         public override UserControl ObterListagem()
         {
-            if (listagemContato == null)
-                listagemContato = new ListagemContatoControl();
+            if (TabelaContatos == null)
+                TabelaContatos = new TabelaContatoControl();
 
             CarregarContatos();
 
-            return listagemContato;
+            return TabelaContatos;
         }
+
     }
 }
