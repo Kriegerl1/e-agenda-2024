@@ -33,7 +33,7 @@ namespace eAgenda.WinApp.ModuloCompromisso
                 return TipoSelecionado;
             }
         }
-        public Compromisso(string assunto,string local, string link, DateTime data, TimeSpan horaInicio, TimeSpan horaTermino, Contato contato)
+        public Compromisso(string assunto, string local, string link, DateTime data, TimeSpan horaInicio, TimeSpan horaTermino, Contato contato)
         {
             Assunto = assunto;
             Local = local;
@@ -41,6 +41,7 @@ namespace eAgenda.WinApp.ModuloCompromisso
             Data = data;
             HoraInicio = horaInicio;
             HoraTermino = horaTermino;
+            Contato = contato;
 
         }
 
@@ -77,6 +78,13 @@ namespace eAgenda.WinApp.ModuloCompromisso
                 erros.Add("O termino não pode ser antes do início do compromisso.");
 
             return erros;
+        }
+
+        public override string? ToString()
+        {
+            string nomeContato = Contato == null ? string.Empty : Contato.Nome;
+
+            return $"Id: {Id}, Assunto: {Assunto}, Data: {Data.ToShortDateString()}, Início: {HoraInicio.ToString(@"hh\:mm")}, Término: {HoraTermino.ToString(@"hh\:mm")}, Contato: {nomeContato}, Tipo: {TipoCompromisso.ToString()}";
         }
     }
 }

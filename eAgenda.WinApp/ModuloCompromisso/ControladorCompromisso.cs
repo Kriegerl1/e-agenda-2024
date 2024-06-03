@@ -120,7 +120,36 @@ namespace eAgenda.WinApp.ModuloCompromisso
 
         public void Filtrar()
         {
-            
+            TelaFiltrarCompromissoForm telaFiltrar = new TelaFiltrarCompromissoForm();
+
+            DialogResult resultado = telaFiltrar.ShowDialog();
+
+            if (resultado != DialogResult.OK)
+                return;
+
+            TipoFiltroCompromissosEnum filtroSelecionado = telaFiltrar.filtroSelecionado;
+
+            List<Compromisso> compromissosSelecionados;
+
+            if (filtroSelecionado == TipoFiltroCompromissosEnum.Passados)
+                compromissosSelecionados = repositorioCompromisso.SelecionarPassados();
+
+            else if (filtroSelecionado == TipoFiltroCompromissosEnum.Futuros)
+                compromissosSelecionados = repositorioCompromisso.SelecionarFuturos();
+            else if (filtroSelecionado == TipoFiltroCompromissosEnum.PorPeriodo)
+            {
+                DateTime PeriodoInicial = telaFiltrar.InicioPeriodo;
+                DateTime PeriodoFinal = telaFiltrar.TerminoPeriodo;
+
+                compromissosSelecionados = repositorioCompromisso.CompromissoPorPeriodo(PeriodoInicial, PeriodoFinal);
+            }
+            else
+            {
+                compromissosSelecionados = repositorioCompromisso.SelecionarTodos();
+            }
+
+            tabelaCompromisso.AtualizarRegistros(compromissosSelecionados);
+
         }
 
         public override UserControl ObterListagem()

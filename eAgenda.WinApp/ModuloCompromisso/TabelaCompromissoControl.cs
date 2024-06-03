@@ -21,6 +21,9 @@ namespace eAgenda.WinApp.ModuloCompromisso
             grid.Columns.AddRange(ObterColunas());
 
 
+            grid.ConfigurarGridSomenteLeitura();
+            grid.ConfigurarGridZebrado();
+
         }
 
 
@@ -45,6 +48,7 @@ namespace eAgenda.WinApp.ModuloCompromisso
         }
         private DataGridViewColumn[] ObterColunas()
         {
+
             return new DataGridViewColumn[] {
                 new DataGridViewTextBoxColumn { DataPropertyName = "Id", HeaderText = "Id" },
                 new DataGridViewTextBoxColumn { DataPropertyName = "Assunto", HeaderText = "Assunto" },

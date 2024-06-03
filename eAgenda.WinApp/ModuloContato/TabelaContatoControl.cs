@@ -16,6 +16,12 @@ namespace eAgenda.WinApp.ModuloContato
         public TabelaContatoControl()
         {
             InitializeComponent();
+
+
+
+            grid.ConfigurarGridSomenteLeitura();
+            grid.ConfigurarGridZebrado();
+
         }
 
         public void AtualizarRegistros(List<Contato> contatos)

@@ -122,6 +122,7 @@
             // 
             // dtHoraInicio
             // 
+            dtHoraInicio.CustomFormat = "HH:mm";
             dtHoraInicio.Format = DateTimePickerFormat.Custom;
             dtHoraInicio.Location = new Point(81, 177);
             dtHoraInicio.Name = "dtHoraInicio";
@@ -130,6 +131,7 @@
             // 
             // dtHoraTermino
             // 
+            dtHoraTermino.CustomFormat = "HH:mm";
             dtHoraTermino.Format = DateTimePickerFormat.Custom;
             dtHoraTermino.Location = new Point(317, 177);
             dtHoraTermino.Name = "dtHoraTermino";
@@ -209,16 +211,18 @@
             // 
             // btnGravar
             // 
+            btnGravar.DialogResult = DialogResult.OK;
             btnGravar.Location = new Point(249, 312);
             btnGravar.Name = "btnGravar";
             btnGravar.Size = new Size(75, 51);
             btnGravar.TabIndex = 8;
             btnGravar.Text = "Gravar";
             btnGravar.UseVisualStyleBackColor = true;
-            btnGravar.Click += btnGravar_Click_1;
+            btnGravar.Click += btnGravar_Click;
             // 
             // btnCancelar
             // 
+            btnCancelar.DialogResult = DialogResult.Cancel;
             btnCancelar.Location = new Point(339, 312);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(75, 51);

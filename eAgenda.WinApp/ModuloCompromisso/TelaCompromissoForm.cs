@@ -32,12 +32,12 @@ namespace eAgenda.WinApp.ModuloCompromisso
 
                 if (value.TipoCompromisso == TipoCompromissoEnum.Presencial)
                 {
-                    rdbPresencial.Checked = true;
+                    txtPresencial.Enabled = true;
                     txtLink.Text = value.Local;
                 }
                 else
                 {
-                    rdbRemoto.Checked = true;
+                    txtLink.Enabled = true;
                     txtLink.Text = value.Link;
                 }
             }
@@ -52,10 +52,10 @@ namespace eAgenda.WinApp.ModuloCompromisso
             cmbContato.Items.Clear();
 
             foreach (Contato c in contatos)
-                cmbContato.Items.Add(c.Nome);
+                cmbContato.Items.Add(c);
         }
 
-        private void btnGravar_Click_1(object sender, EventArgs e)
+        private void btnGravar_Click(object sender, EventArgs e)
         {
             string assunto = txtAssunto.Text;
             DateTime data = dtData.Value;
@@ -63,7 +63,7 @@ namespace eAgenda.WinApp.ModuloCompromisso
             TimeSpan horaTermino = dtHoraTermino.Value.TimeOfDay;
             Contato contato = (Contato)cmbContato.SelectedItem;
 
-            string local = txtLink.Text;
+            string local = txtPresencial.Text;
             string link = txtLink.Text;
 
             compromisso = new Compromisso(assunto, local, link, data, horaInicio, horaTermino, contato);
@@ -86,23 +86,26 @@ namespace eAgenda.WinApp.ModuloCompromisso
             {
                 txtLink.Text = string.Empty;
                 txtLink.Enabled = false;
+                txtPresencial.Enabled = true;
             }
             else
             {
                 txtLink.Enabled = true;
             }
+
         }
 
         private void rdbRemoto_CheckedChanged(object sender, EventArgs e)
         {
             if (rdbRemoto.Checked)
             {
-                txtLink.Text = string.Empty;
-                txtLink.Enabled = false;
+                txtPresencial.Text = string.Empty;
+                txtLink.Enabled = true;
+                txtPresencial.Enabled = false;
             }
             else
             {
-                txtLink.Enabled = true;
+                txtPresencial.Enabled = true;
             }
         }
     }

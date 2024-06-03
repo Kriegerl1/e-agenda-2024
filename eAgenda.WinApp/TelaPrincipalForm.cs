@@ -23,6 +23,11 @@ namespace eAgenda.WinApp
             repositorioCompromisso = new RepositorioCompromisso();
         }
 
+        public void AtualizarRodape(string texto)
+        {
+            statusLabelPrincipal.Text = texto;
+        }
+
         private void compromissosMenuItem_Click(object sender, EventArgs e)
         {
             controlador = new ControladorCompromisso(repositorioCompromisso, repositorioContato);
@@ -40,6 +45,7 @@ namespace eAgenda.WinApp
 
         private void ConfigurarToolBox(ControladorBase controladorSelecionado)
         {
+
             btnAdicionar.Enabled = controladorSelecionado is ControladorBase;
             btnEditar.Enabled = controladorSelecionado is ControladorBase;
             btnExcluir.Enabled = controladorSelecionado is ControladorBase;
@@ -68,6 +74,8 @@ namespace eAgenda.WinApp
         }
         private void ConfigurarToolTips(ControladorBase controladorSelecionado)
         {
+
+
             btnAdicionar.ToolTipText = controladorSelecionado.ToolTipAdicionar;
             btnEditar.ToolTipText = controladorSelecionado.ToolTipEditar;
             btnExcluir.ToolTipText = controladorSelecionado.ToolTipExcluir;
@@ -92,7 +100,5 @@ namespace eAgenda.WinApp
             ConfigurarToolBox(controladorSelecionado);
             ConfigurarListagem(controladorSelecionado);
         }
-
-
     }
 }
