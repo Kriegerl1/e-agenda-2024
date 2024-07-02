@@ -1,11 +1,12 @@
-﻿using eAgenda.WinApp.Compartilhado;
+﻿using eAgenda.WinApp._2___ModuloContato;
+using eAgenda.WinApp.Compartilhado;
 
 namespace eAgenda.WinApp.ModuloContato
 {
     public class ControladorContato : ControladorBase
     {
         private RepositorioContato repositorioContato;
-        private ListagemContatoControl listagemContato;
+        private TabelaContatoControl tabelaContato;
 
         public ControladorContato(RepositorioContato repositorio)
         {
@@ -35,7 +36,21 @@ namespace eAgenda.WinApp.ModuloContato
                 CarregarContatos();
             }
         }
+        public override void Excluir()
+        {
+            int idSelecionado = tabelaContato.ObterRegistroSelecionado();
 
+            Contato contatoSelecionado = repositorioContato.SelecionarPorId(idSelecionado);
+
+
+
+
+        }
+
+        public override void Editar()
+        {
+            throw new NotImplementedException();
+        }
         private void CarregarContatos()
         {
             List<Contato> contatos = repositorioContato.SelecionarTodos();
@@ -52,5 +67,7 @@ namespace eAgenda.WinApp.ModuloContato
 
             return listagemContato;
         }
+
+
     }
 }
