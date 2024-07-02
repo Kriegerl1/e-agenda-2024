@@ -2,7 +2,7 @@
 
 namespace eAgenda.WinApp.ModuloContato
 {
-    public class RepositorioContato : RepositorioBase<Contato>
+    public class RepositorioContato : RepositorioEmMemoria<Contato>
     {
     }
 }
